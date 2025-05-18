@@ -1,19 +1,30 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog"
-import { X } from "lucide-react"
-import { allergyLabels } from "@/data/allergy-labels"
-import { restaurants } from "@/data/restaurants"
-import type { Restaurant } from "@/types/restaurant"
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { allergyLabels } from '@/data/allergy-labels';
+import { restaurants } from '@/data/restaurants';
+import type { Restaurant } from '@/types/restaurant';
+import { X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface AllergyFilterModalProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  onFilterApply: (filteredRestaurants: Restaurant[], selectedAllergies: string[]) => void
-  initialSelectedAllergies?: string[]
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onFilterApply: (
+    filteredRestaurants: Restaurant[],
+    selectedAllergies: string[]
+  ) => void;
+  initialSelectedAllergies?: string[];
+  isFirstLoad?: boolean;
 }
 
 export default function AllergyFilterModal({
@@ -21,72 +32,114 @@ export default function AllergyFilterModal({
   onOpenChange,
   onFilterApply,
   initialSelectedAllergies = [],
+  isFirstLoad = false,
 }: AllergyFilterModalProps) {
-  const [selectedAllergies, setSelectedAllergies] = useState<string[]>(initialSelectedAllergies)
-  const [isMobile, setIsMobile] = useState(false)
+  const [selectedAllergies, setSelectedAllergies] = useState<string[]>(
+    initialSelectedAllergies
+  );
+  const [isMobile, setIsMobile] = useState(false);
 
   // Check if we're on mobile
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Update selected allergies when initialSelectedAllergies changes
   useEffect(() => {
-    setSelectedAllergies(initialSelectedAllergies)
-  }, [initialSelectedAllergies])
+    setSelectedAllergies(initialSelectedAllergies);
+  }, [initialSelectedAllergies]);
 
   const toggleAllergy = (allergyId: string) => {
     setSelectedAllergies((prev) => {
-      if (prev.includes(allergyId)) {
-        return prev.filter((id) => id !== allergyId)
-      } else {
-        return [...prev, allergyId]
-      }
-    })
-  }
+      const newSelectedAllergies = prev.includes(allergyId)
+        ? prev.filter((id) => id !== allergyId)
+        : [...prev, allergyId];
 
-  const applyFilter = () => {
-    if (selectedAllergies.length === 0) {
+      // If this is the first page load, automatically apply the filter when an allergy is toggled
+      // but don't close the modal
+      if (isFirstLoad) {
+        applyFilterWithoutClosing(newSelectedAllergies);
+      }
+
+      return newSelectedAllergies;
+    });
+  };
+
+  const applyFilterWithoutClosing = (allergiesToApply: string[]) => {
+    if (allergiesToApply.length === 0) {
       // If no allergies selected, show all restaurants
-      onFilterApply(restaurants, [])
-      onOpenChange(false)
-      return
+      onFilterApply(restaurants, []);
+      return;
     }
 
     // Filter restaurants that accommodate all selected allergies/diets
     const filteredRestaurants = restaurants.filter((restaurant) => {
       // Check if the restaurant accommodates all selected allergies
-      return selectedAllergies.every((allergyId) => restaurant.allergyLabels.includes(allergyId))
-    })
+      return allergiesToApply.every((allergyId) =>
+        restaurant.allergyLabels.includes(allergyId)
+      );
+    });
 
-    onFilterApply(filteredRestaurants, selectedAllergies)
-    onOpenChange(false)
-  }
+    // Apply the filter but don't close the modal
+    onFilterApply(filteredRestaurants, allergiesToApply);
+  };
+
+  const applyFilter = (allergiesToApply = selectedAllergies) => {
+    if (allergiesToApply.length === 0) {
+      // If no allergies selected, show all restaurants
+      onFilterApply(restaurants, []);
+      onOpenChange(false);
+      return;
+    }
+
+    // Filter restaurants that accommodate all selected allergies/diets
+    const filteredRestaurants = restaurants.filter((restaurant) => {
+      // Check if the restaurant accommodates all selected allergies
+      return allergiesToApply.every((allergyId) =>
+        restaurant.allergyLabels.includes(allergyId)
+      );
+    });
+
+    onFilterApply(filteredRestaurants, allergiesToApply);
+    onOpenChange(false);
+  };
 
   // Group allergy labels by category
-  const foodAllergies = allergyLabels.filter((label) => !["vegetarian", "vegan", "gluten"].includes(label.id))
+  const foodAllergies = allergyLabels.filter(
+    (label) => !['vegetarian', 'vegan', 'gluten'].includes(label.id)
+  );
 
-  const specialDiets = allergyLabels.filter((label) => ["vegetarian", "vegan", "gluten"].includes(label.id))
+  const specialDiets = allergyLabels.filter((label) =>
+    ['vegetarian', 'vegan', 'gluten'].includes(label.id)
+  );
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className={`sm:max-w-md z-[2000] p-6 ${isMobile ? "mx-4 max-h-[90vh] overflow-auto" : ""}`}>
+      <DialogContent
+        className={`sm:max-w-md z-[2000] p-6 ${
+          isMobile ? 'mx-4 max-h-[90vh] overflow-auto' : ''
+        }`}
+      >
         <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </DialogClose>
 
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">Select your diet to get started.</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">
+            Select your diet to get started.
+          </DialogTitle>
         </DialogHeader>
 
         <div className="py-4 space-y-6">
           {/* Food Allergies & Restrictions Section */}
           <div>
-            <h3 className="text-xl font-semibold mb-4">Food Allergies & Restrictions</h3>
+            <h3 className="text-xl font-semibold mb-4">
+              Food Allergies & Restrictions
+            </h3>
             <div className="space-y-3">
               {foodAllergies.map((allergy) => (
                 <div key={allergy.id} className="flex items-center space-x-2">
@@ -122,8 +175,8 @@ export default function AllergyFilterModal({
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="diet-vegetarian"
-                  checked={selectedAllergies.includes("vegetarian")}
-                  onCheckedChange={() => toggleAllergy("vegetarian")}
+                  checked={selectedAllergies.includes('vegetarian')}
+                  onCheckedChange={() => toggleAllergy('vegetarian')}
                 />
                 <label
                   htmlFor="diet-vegetarian"
@@ -135,8 +188,8 @@ export default function AllergyFilterModal({
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="diet-vegan"
-                  checked={selectedAllergies.includes("vegan")}
-                  onCheckedChange={() => toggleAllergy("vegan")}
+                  checked={selectedAllergies.includes('vegan')}
+                  onCheckedChange={() => toggleAllergy('vegan')}
                 />
                 <label
                   htmlFor="diet-vegan"
@@ -148,8 +201,8 @@ export default function AllergyFilterModal({
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="diet-gluten-free"
-                  checked={selectedAllergies.includes("gluten")}
-                  onCheckedChange={() => toggleAllergy("gluten")}
+                  checked={selectedAllergies.includes('gluten')}
+                  onCheckedChange={() => toggleAllergy('gluten')}
                 />
                 <label
                   htmlFor="diet-gluten-free"
@@ -164,16 +217,18 @@ export default function AllergyFilterModal({
 
         <DialogFooter>
           <Button
-            onClick={applyFilter}
+            onClick={() => applyFilter()}
             className={`w-full py-6 text-lg rounded-full ${
-              isMobile ? "bg-green-400 hover:bg-green-500 text-black" : "bg-gray-200 hover:bg-gray-300 text-black"
+              isMobile
+                ? 'bg-green-400 hover:bg-green-500 text-black'
+                : 'bg-gray-200 hover:bg-gray-300 text-black'
             }`}
-            variant={isMobile ? "default" : "secondary"}
+            variant={isMobile ? 'default' : 'secondary'}
           >
             Submit
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

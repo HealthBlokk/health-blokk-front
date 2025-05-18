@@ -45,6 +45,17 @@ function MapClassUpdater({
   return null;
 }
 
+// Helper component to update zoom based on mobile state
+function ZoomUpdater({ isMobile }: { isMobile: boolean }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.setZoom(isMobile ? 13 : 15);
+  }, [isMobile, map]);
+
+  return null;
+}
+
 interface MapComponentProps {
   restaurants: Restaurant[];
   onSelectRestaurant: (restaurant: Restaurant) => void;
@@ -79,12 +90,13 @@ export default function MapComponent({
   return (
     <MapContainer
       center={[47.378955, 8.5428021]}
-      zoom={13}
+      zoom={15}
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
       className="z-0"
     >
       <MapClassUpdater selectedRestaurant={selectedRestaurant} />
+      <ZoomUpdater isMobile={isMobile} />
 
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -34,6 +34,7 @@ export default function Home() {
   const [hasAppliedFilter, setHasAppliedFilter] = useState(false);
   const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [isFirstPageLoad, setIsFirstPageLoad] = useState(true);
 
   // Check if we're on mobile
   useEffect(() => {
@@ -41,6 +42,13 @@ export default function Home() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // Mark that we've loaded the page once
+    return () => {
+      setIsFirstPageLoad(false);
+    };
   }, []);
 
   const handleRestaurantSelect = (restaurant: Restaurant) => {
@@ -56,9 +64,15 @@ export default function Home() {
     appliedAllergies: string[]
   ) => {
     setFilteredRestaurants(restaurants);
-    setHasAppliedFilter(true);
+    setHasAppliedFilter(appliedAllergies.length > 0);
     setSelectedAllergies(appliedAllergies);
-    setIsFilterModalOpen(false);
+
+    // Only close the modal and mark as not first load if this isn't
+    // coming from an automatic filter during first page load
+    if (!isFirstPageLoad || restaurants === allRestaurants) {
+      setIsFilterModalOpen(false);
+      setIsFirstPageLoad(false);
+    }
 
     // Show toast notification with filter results
     if (restaurants.length === 0) {
@@ -104,6 +118,7 @@ export default function Home() {
       }
       // Always allow closing the modal
       setIsFilterModalOpen(false);
+      setIsFirstPageLoad(false);
     } else {
       setIsFilterModalOpen(true);
     }
@@ -182,6 +197,7 @@ export default function Home() {
             onOpenChange={handleModalClose}
             onFilterApply={handleFilterApply}
             initialSelectedAllergies={selectedAllergies}
+            isFirstLoad={isFirstPageLoad}
           />
         </>
       )}

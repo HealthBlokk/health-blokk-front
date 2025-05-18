@@ -709,19 +709,6 @@ export const menuItems: MenuItem[] = [
     ingredientIds: ['i13', 'i11', 'i35', 'i42'], // Gluten-free flour, Cheese, Salami, Mortadella
     allergyLabels: ['gluten'],
   },
-  // Appetizers
-  // Previous item for reference (already correct)
-  {
-    id: 'm44',
-    name: 'Coccoli Classici (for 2)',
-    description:
-      'Eine Spezialität aus Florenz, bestehend aus köstlichen frittierten Bällchen, begleitet von einer Auswahl an Mortadella, Salami und Käse',
-    price: 26.0, // CHF
-    categoryId: 'c1',
-    restaurantId: 'r11',
-    ingredientIds: ['i13', 'i11', 'i96', 'i88'], // Flour, Cheese, Mortadella, Salami
-    allergyLabels: ['gluten'],
-  },
 
   // Appetizers
   {
