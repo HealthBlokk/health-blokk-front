@@ -43,7 +43,9 @@ export default function RestaurantPage() {
     setRestaurant(foundRestaurant || null);
 
     // Get base URL for QR code
-    setBaseUrl(window.location.origin);
+    if (typeof window !== 'undefined') {
+      setBaseUrl(window.location.origin);
+    }
 
     // Fetch reviews for this restaurant
     if (foundRestaurant) {
