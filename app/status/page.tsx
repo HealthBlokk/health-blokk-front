@@ -1,9 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import * as Container from '../container/container';
+'use client';
+
+import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import * as Container from '../../lib/container/container';
 
 const StatusPage: React.FC = () => {
-  const [apiResponse, setApiResponse] = React.useState('loading...');
+  const [apiResponse, setApiResponse] = useState('loading...');
   Container.CLIENT_API.get('/')
     .then((response) => {
       if (response.error) {
@@ -20,12 +23,7 @@ const StatusPage: React.FC = () => {
       <h1>Home</h1>
       <p>{apiResponse}</p>
       <br />
-      <Link
-        to={{
-          pathname: '/restaurants',
-        }}
-        className="text-blue-500"
-      >
+      <Link href="/restaurants" className="text-blue-500">
         Click to see the list of restaurants
       </Link>
     </div>

@@ -1,15 +1,16 @@
-import imgPlaceholder from '@/assets/images/restaurant-placeholder.jpg';
+'use client';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Globe, Heart, MapPin, Phone } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '../components/ui/tabs';
+} from '../../components/ui/tabs';
 
 // Types for our restaurant data model
 interface MenuItem {
@@ -45,11 +46,11 @@ interface Restaurant {
 }
 
 export default function RestaurantProfile() {
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRestaurantData = async () => {
@@ -62,7 +63,7 @@ export default function RestaurantProfile() {
 
         // For demo purposes, we'll use mock data that matches the image
         const mockRestaurant: Restaurant = {
-          id: id || '1',
+          id: '1',
           name: 'La Piazza Restaurant',
           rating: 4.8,
           priceRange: '$$$',
@@ -144,7 +145,7 @@ export default function RestaurantProfile() {
     };
 
     fetchRestaurantData();
-  }, [id]);
+  }, []);
 
   if (loading)
     return (
@@ -163,7 +164,7 @@ export default function RestaurantProfile() {
         <div
           className="w-full h-48 md:h-72 bg-gray-200 relative"
           style={{
-            backgroundImage: `url(${imgPlaceholder})`,
+            backgroundImage: `url(/images/restaurant-placeholder.jpg)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -174,7 +175,7 @@ export default function RestaurantProfile() {
                 variant="ghost"
                 size="icon"
                 className="rounded-full bg-black/80 text-white cursor-pointer"
-                onClick={() => navigate('/restaurants')}
+                // onClick={() => navigate('/restaurants')}
               >
                 <ArrowLeft className="h-5 w-5 bg" />
               </Button>
