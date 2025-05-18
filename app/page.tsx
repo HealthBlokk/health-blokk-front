@@ -129,7 +129,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col relative">
+    <main className="flex h-[calc(100vh-135px)] md:min-h-screen flex-col relative top-[58px] md:top-0">
       {/* Map container - full screen on mobile */}
       <div className="absolute inset-0 w-full h-full">
         <MapComponent

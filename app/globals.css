@@ -38,9 +38,9 @@
   }
 
   /* Adjust Leaflet controls for mobile */
-  .leaflet-control-zoom {
+  /* .leaflet-control-zoom {
     margin-bottom: 80px !important;
-  }
+  } */
 
   .leaflet-control-attribution {
     display: none;
