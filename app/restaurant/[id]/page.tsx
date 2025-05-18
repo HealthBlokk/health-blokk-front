@@ -35,23 +35,39 @@ export default function RestaurantPage() {
   const [newReview, setNewReview] = useState<Review | undefined>(undefined);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loadingReviews, setLoadingReviews] = useState(true);
+  const [isBrowser, setIsBrowser] = useState(false);
 
+  // Set isBrowser flag to true once component mounts in browser
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  // Handle restaurant data
   useEffect(() => {
     // Find restaurant by ID
     const id = params?.id as string;
     const foundRestaurant = restaurants.find((r) => r.id === id);
     setRestaurant(foundRestaurant || null);
 
-    // Get base URL for QR code
-    if (typeof window !== 'undefined') {
-      setBaseUrl(window.location.origin);
-    }
-
     // Fetch reviews for this restaurant
     if (foundRestaurant) {
       fetchReviews(foundRestaurant.id);
     }
   }, [params]);
+
+  // Handle browser-specific operations
+  useEffect(() => {
+    if (isBrowser) {
+      try {
+        // Get base URL for sharing
+        setBaseUrl(window.location.origin);
+      } catch (error) {
+        console.error('Error accessing window:', error);
+        // Fallback value if window access fails
+        setBaseUrl('https://healthblokk.netlify.app');
+      }
+    }
+  }, [isBrowser]);
 
   const fetchReviews = async (restaurantId: string) => {
     try {
@@ -93,6 +109,11 @@ export default function RestaurantPage() {
     restaurant.image ||
     `/placeholder.svg?height=400&width=1200&query=restaurant ${restaurant.name}`;
 
+  // Use a safe URL string for sharing
+  const shareUrl = baseUrl
+    ? `${baseUrl}/restaurant/${restaurant.id}`
+    : `/restaurant/${restaurant.id}`;
+
   return (
     <div className="bg-gray-50">
       {/* Header Section */}
@@ -127,10 +148,12 @@ export default function RestaurantPage() {
                 >
                   <Heart className="h-5 w-5" />
                 </Button>
-                <SharePopup
-                  url={`${baseUrl}/restaurant/${restaurant.id}`}
-                  title={`${restaurant.name} | HealthBlokk`}
-                />
+                {isBrowser && (
+                  <SharePopup
+                    url={shareUrl}
+                    title={`${restaurant.name} | HealthBlokk`}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -162,7 +185,7 @@ export default function RestaurantPage() {
           {restaurant.allergyLabels.length > 0 && (
             <div className="flex flex-wrap gap-1 mt-2">
               {allergies.map((allergyLabel, index) => (
-                <div>
+                <div key={allergyLabel.id}>
                   <StyledAllergyLabel
                     key={index}
                     id={allergyLabel.id}
