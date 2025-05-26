@@ -3,8 +3,9 @@ FROM node:20.14.0 AS base
 WORKDIR /app
 
 # Install dependencies
-COPY package.json package-lock.json ./
-RUN npm i --force
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --force
 COPY . .
 
 # Development stage (used by docker-compose for local development)

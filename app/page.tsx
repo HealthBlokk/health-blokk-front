@@ -5,7 +5,7 @@ import FilterChips from '@/components/filter-chips';
 import FloatingFilterIndicator from '@/components/floating-filter-indicator';
 import MapOverlay from '@/components/map-overlay';
 import MobileNav from '@/components/mobile-nav';
-import RestaurantCardPreview from '@/components/restaurant-card-preview';
+import MobileRestaurantList from '@/components/mobile-restaurant-list';
 import RestaurantInfoBox from '@/components/restaurant-info-box';
 import { Button } from '@/components/ui/button';
 import { restaurants as allRestaurants } from '@/data/restaurants';
@@ -52,7 +52,11 @@ export default function Home() {
   }, []);
 
   const handleRestaurantSelect = (restaurant: Restaurant) => {
-    setSelectedRestaurant(restaurant);
+    if (restaurant.id === selectedRestaurant?.id) {
+      setSelectedRestaurant(null);
+    } else {
+      setSelectedRestaurant(restaurant);
+    }
   };
 
   const handleCloseInfoBox = () => {
@@ -162,10 +166,12 @@ export default function Home() {
       )}
 
       {/* Mobile restaurant card preview */}
-      {isMobile && selectedRestaurant && (
-        <RestaurantCardPreview
-          restaurant={selectedRestaurant}
-          onClose={handleCloseInfoBox}
+      {isMobile && (
+        <MobileRestaurantList
+          restaurants={filteredRestaurants}
+          selectedRestaurant={selectedRestaurant}
+          onSelectRestaurant={handleRestaurantSelect}
+          onCloseSelection={handleCloseInfoBox}
         />
       )}
 
