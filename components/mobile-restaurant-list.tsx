@@ -23,6 +23,8 @@ export default function MobileRestaurantList({
     ? [selectedRestaurant]
     : restaurants;
 
+  console.log({ displayRestaurants });
+
   return (
     <div className="fixed bottom-20 left-0 right-0 z-[1001] border-t border-gray-200">
       <div className="flex overflow-x-auto gap-3 p-4 hide-scrollbar">
@@ -40,9 +42,7 @@ export default function MobileRestaurantList({
           return (
             <div
               key={restaurant.id}
-              className={`flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden border-2 cursor-pointer ${
-                isSelected ? 'border-blue-500' : 'border-transparent'
-              }`}
+              className={`flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden border-2 cursor-pointer`}
               onClick={() => {
                 // If this restaurant is already selected, navigate to its page
                 if (isSelected) {
@@ -103,11 +103,7 @@ export default function MobileRestaurantList({
                     }
                   }}
                 >
-                  <Heart
-                    className={`w-6 h-6 ${
-                      isSelected ? 'text-red-500 fill-red-500' : 'text-gray-400'
-                    }`}
-                  />
+                  <Heart className={`w-6 h-6`} />
                 </button>
               </div>
             </div>

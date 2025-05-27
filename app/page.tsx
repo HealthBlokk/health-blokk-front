@@ -24,12 +24,60 @@ const MapComponent = dynamic(() => import('@/components/map-component'), {
   ),
 });
 
+// Helper function to calculate distance between two points
+function calculateDistance(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371; // Radius of the Earth in kilometers
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+// Helper function to get visible restaurants based on map center and zoom
+function getVisibleRestaurants(
+  restaurants: Restaurant[],
+  mapCenter: [number, number],
+  zoomLevel: number
+): Restaurant[] {
+  // Calculate radius based on zoom level (rough approximation)
+  // Higher zoom = smaller radius, lower zoom = larger radius
+  const baseRadius = 50; // km at zoom level 10
+  const radius = baseRadius / Math.pow(2, zoomLevel - 10);
+
+  return restaurants.filter((restaurant) => {
+    const distance = calculateDistance(
+      mapCenter[0],
+      mapCenter[1],
+      restaurant.latitude,
+      restaurant.longitude
+    );
+    return distance <= radius;
+  });
+}
+
 export default function Home() {
   const { toast } = useToast();
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
   const [filteredRestaurants, setFilteredRestaurants] =
     useState<Restaurant[]>(allRestaurants);
+  const [visibleRestaurants, setVisibleRestaurants] =
+    useState<Restaurant[]>(allRestaurants);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([
+    47.4052169, 9.743446,
+  ]);
+  const [zoomLevel, setZoomLevel] = useState(15);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(true);
   const [hasAppliedFilter, setHasAppliedFilter] = useState(false);
   const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
@@ -44,6 +92,23 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Update visible restaurants when map center, zoom, or filtered restaurants change
+  useEffect(() => {
+    const visible = getVisibleRestaurants(
+      filteredRestaurants,
+      mapCenter,
+      zoomLevel
+    );
+    setVisibleRestaurants(visible);
+
+    console.log({
+      mapCenter,
+      zoomLevel,
+      totalFiltered: filteredRestaurants.length,
+      visibleCount: visible.length,
+    });
+  }, [mapCenter, zoomLevel, filteredRestaurants]);
+
   useEffect(() => {
     // Mark that we've loaded the page once
     return () => {
@@ -56,11 +121,18 @@ export default function Home() {
       setSelectedRestaurant(null);
     } else {
       setSelectedRestaurant(restaurant);
+      // Update map center when a restaurant is selected
+      setMapCenter([restaurant.latitude, restaurant.longitude]);
     }
   };
 
   const handleCloseInfoBox = () => {
     setSelectedRestaurant(null);
+  };
+
+  const handleMapChange = (center: [number, number], zoom: number) => {
+    setMapCenter(center);
+    setZoomLevel(zoom);
   };
 
   const handleFilterApply = (
@@ -140,6 +212,7 @@ export default function Home() {
           restaurants={filteredRestaurants}
           onSelectRestaurant={handleRestaurantSelect}
           selectedRestaurant={selectedRestaurant}
+          onMapChange={handleMapChange}
         />
       </div>
 
@@ -168,7 +241,7 @@ export default function Home() {
       {/* Mobile restaurant card preview */}
       {isMobile && (
         <MobileRestaurantList
-          restaurants={filteredRestaurants}
+          restaurants={visibleRestaurants}
           selectedRestaurant={selectedRestaurant}
           onSelectRestaurant={handleRestaurantSelect}
           onCloseSelection={handleCloseInfoBox}

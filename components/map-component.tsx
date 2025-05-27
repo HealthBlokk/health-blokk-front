@@ -12,6 +12,7 @@ import {
   TileLayer,
   ZoomControl,
   useMap,
+  useMapEvents,
 } from 'react-leaflet';
 
 // Create custom icon using the provided SVG
@@ -24,6 +25,36 @@ const createCustomIcon = (isSelected = false) => {
     className: isSelected ? 'selected-pin' : 'normal-pin',
   });
 };
+
+// Helper component to track map events and update parent state
+function MapEventTracker({
+  onMapChange,
+}: {
+  onMapChange: (center: [number, number], zoom: number) => void;
+}) {
+  const map = useMap();
+
+  const handleMapChange = () => {
+    const center = map.getCenter();
+    const zoom = map.getZoom();
+    onMapChange([center.lat, center.lng], zoom);
+  };
+
+  // Track map events that change the view
+  useMapEvents({
+    moveend: handleMapChange,
+    zoomend: handleMapChange,
+  });
+
+  // Initial map state
+  useEffect(() => {
+    // Small delay to ensure map is fully loaded
+    const timer = setTimeout(handleMapChange, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return null;
+}
 
 // Helper component to add/remove class on the map container
 function MapClassUpdater({
@@ -56,16 +87,42 @@ function ZoomUpdater({ isMobile }: { isMobile: boolean }) {
   return null;
 }
 
+// Helper component to center the map on the selected restaurant
+function MapCenterUpdater({
+  selectedRestaurant,
+}: {
+  selectedRestaurant: Restaurant | null;
+}) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (selectedRestaurant) {
+      map.setView(
+        [selectedRestaurant.latitude, selectedRestaurant.longitude],
+        map.getZoom(),
+        {
+          animate: true,
+          duration: 0.5,
+        }
+      );
+    }
+  }, [selectedRestaurant, map]);
+
+  return null;
+}
+
 interface MapComponentProps {
   restaurants: Restaurant[];
   onSelectRestaurant: (restaurant: Restaurant) => void;
   selectedRestaurant: Restaurant | null;
+  onMapChange?: (center: [number, number], zoom: number) => void;
 }
 
 export default function MapComponent({
   restaurants,
   onSelectRestaurant,
   selectedRestaurant,
+  onMapChange,
 }: MapComponentProps) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -89,7 +146,7 @@ export default function MapComponent({
 
   return (
     <MapContainer
-      center={[47.378955, 8.5428021]}
+      center={[47.4052169, 9.743446]}
       zoom={15}
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
@@ -97,6 +154,10 @@ export default function MapComponent({
     >
       <MapClassUpdater selectedRestaurant={selectedRestaurant} />
       <ZoomUpdater isMobile={isMobile} />
+      <MapCenterUpdater selectedRestaurant={selectedRestaurant} />
+
+      {/* Add map event tracker if callback is provided */}
+      {onMapChange && <MapEventTracker onMapChange={onMapChange} />}
 
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

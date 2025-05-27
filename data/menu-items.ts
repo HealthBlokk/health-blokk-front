@@ -4546,4 +4546,654 @@ export const menuItems: MenuItem[] = [
     ingredientIds: ['i60', 'i562', 'i248', 'i552', 'i563', 'i564', 'i565'],
     allergyLabels: ['dairy', 'vegan', 'treenut'],
   },
+
+  // Café Deli (r40) - Breakfast & Light Meals
+  {
+    id: 'm363',
+    name: 'Swiss Birchermüesli',
+    description:
+      'Traditional Swiss muesli with oats, fresh fruits, nuts, and yogurt.',
+    price: '8.50', // CHF
+    categoryId: 'c1', // Breakfast
+    restaurantId: 'r40',
+    ingredientIds: ['i248', 'i47', 'i84', 'i532'],
+    allergyLabels: ['dairy', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm364',
+    name: 'Croissant with Butter & Jam',
+    description:
+      'Fresh buttery croissant served with Swiss butter and homemade jam.',
+    price: '4.20', // CHF
+    categoryId: 'c1', // Breakfast
+    restaurantId: 'r40',
+    ingredientIds: ['i42', 'i17', 'i49'],
+    allergyLabels: ['gluten', 'dairy', 'egg', 'vegetarian'],
+  },
+  {
+    id: 'm365',
+    name: 'Avocado Toast',
+    description:
+      'Sourdough bread topped with fresh avocado, cherry tomatoes, and herbs.',
+    price: '9.80', // CHF
+    categoryId: 'c1', // Breakfast
+    restaurantId: 'r40',
+    ingredientIds: ['i539', 'i4', 'i2', 'i40'],
+    allergyLabels: ['gluten', 'vegetarian'],
+  },
+  {
+    id: 'm366',
+    name: 'Quiche Lorraine',
+    description: 'Traditional Swiss quiche with bacon, cheese, and herbs.',
+    price: '12.50', // CHF
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r40',
+    ingredientIds: ['i26', 'i18', 'i19', 'i40'],
+    allergyLabels: ['gluten', 'dairy', 'egg'],
+  },
+  {
+    id: 'm367',
+    name: 'Caesar Salad',
+    description:
+      'Fresh romaine lettuce with parmesan, croutons, and Caesar dressing.',
+    price: '11.90', // CHF
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r40',
+    ingredientIds: ['i1', 'i19', 'i42', 'i26'],
+    allergyLabels: ['gluten', 'dairy', 'egg'],
+  },
+  {
+    id: 'm368',
+    name: 'Club Sandwich',
+    description:
+      'Triple-decker sandwich with chicken, bacon, lettuce, tomato, and mayo.',
+    price: '13.80', // CHF
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r40',
+    ingredientIds: ['i42', 'i23', 'i18', 'i1', 'i2'],
+    allergyLabels: ['gluten', 'dairy', 'egg'],
+  },
+  {
+    id: 'm369',
+    name: 'Espresso',
+    description: 'Strong Swiss coffee served in traditional espresso cup.',
+    price: '3.20', // CHF
+    categoryId: 'c4', // Beverages
+    restaurantId: 'r40',
+    ingredientIds: ['i53'],
+    allergyLabels: [],
+  },
+  {
+    id: 'm370',
+    name: 'Cappuccino',
+    description: 'Espresso with steamed milk and foam, dusted with cocoa.',
+    price: '4.50', // CHF
+    categoryId: 'c4', // Beverages
+    restaurantId: 'r40',
+    ingredientIds: ['i53', 'i16'],
+    allergyLabels: ['dairy'],
+  },
+  {
+    id: 'm371',
+    name: 'Hot Chocolate',
+    description:
+      'Rich Swiss hot chocolate made with premium cocoa and steamed milk.',
+    price: '5.20', // CHF
+    categoryId: 'c4', // Beverages
+    restaurantId: 'r40',
+    ingredientIds: ['i537', 'i16'],
+    allergyLabels: ['dairy'],
+  },
+  {
+    id: 'm372',
+    name: 'Apple Strudel',
+    description: 'Traditional Austrian apple strudel with vanilla sauce.',
+    price: '6.80', // CHF
+    categoryId: 'c3', // Desserts
+    restaurantId: 'r40',
+    ingredientIds: ['i42', 'i47', 'i555', 'i250'],
+    allergyLabels: ['gluten', 'dairy', 'egg', 'vegetarian'],
+  },
+
+  // Mint 11 (r41) - STARTER
+  {
+    id: 'm373',
+    name: 'Edamame',
+    description: 'Fresh steamed edamame beans',
+    price: 5.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i566'],
+    allergyLabels: ['soy'],
+  },
+  {
+    id: 'm374',
+    name: 'Baked spring rolls with chicken',
+    description: 'Crispy baked spring rolls filled with seasoned chicken',
+    price: 7.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i567', 'i23', 'i568'],
+    allergyLabels: ['gluten', 'egg', 'dairy', 'treenut'],
+  },
+  {
+    id: 'm375',
+    name: 'Baked spring rolls vegetarian',
+    description: 'Crispy baked spring rolls with vegetable filling',
+    price: 7.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i567', 'i569', 'i568'],
+    allergyLabels: ['gluten', 'egg', 'dairy', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm376',
+    name: 'Summer rolls',
+    description:
+      'Fresh rice paper rolls with cucumber, mango, salad mix, coriander, glass noodles',
+    price: 8.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i570', 'i571', 'i572', 'i573', 'i574', 'i575'],
+    allergyLabels: ['dairy', 'vegetarian'],
+  },
+  {
+    id: 'm377',
+    name: 'Summer rolls - Vegetarian with avocado',
+    description:
+      'Fresh rice paper rolls with avocado, cucumber, mango, salad mix, coriander, glass noodles',
+    price: 8.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i570', 'i4', 'i571', 'i572', 'i573', 'i574', 'i575'],
+    allergyLabels: ['dairy', 'vegetarian'],
+  },
+  {
+    id: 'm378',
+    name: 'Summer rolls - With shrimps',
+    description:
+      'Fresh rice paper rolls with shrimps, cucumber, mango, salad mix, coriander, glass noodles',
+    price: 10.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i570', 'i576', 'i571', 'i572', 'i573', 'i574', 'i575'],
+    allergyLabels: ['dairy', 'shellfish'],
+  },
+  {
+    id: 'm379',
+    name: 'Summer rolls - With chicken',
+    description:
+      'Fresh rice paper rolls with chicken, cucumber, mango, salad mix, coriander, glass noodles',
+    price: 9.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i570', 'i23', 'i571', 'i572', 'i573', 'i574', 'i575'],
+    allergyLabels: ['dairy'],
+  },
+  {
+    id: 'm380',
+    name: 'Ma-La Szechuan-style tofu',
+    description: 'Spicy Szechuan-style tofu with special sauce',
+    price: 6.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i44', 'i577', 'i578'],
+    allergyLabels: ['soy', 'treenut', 'egg', 'vegan'],
+  },
+  {
+    id: 'm381',
+    name: 'Szechuan-style Ma-La Wantan - Chicken',
+    description: 'Spicy Szechuan-style dumplings filled with chicken',
+    price: 7.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i23', 'i577'],
+    allergyLabels: ['gluten', 'egg', 'treenut'],
+  },
+  {
+    id: 'm382',
+    name: 'Szechuan-style Ma-La Wantan - Prawns',
+    description: 'Spicy Szechuan-style dumplings filled with prawns',
+    price: 9.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i576', 'i577'],
+    allergyLabels: ['gluten', 'egg', 'treenut', 'shellfish'],
+  },
+  {
+    id: 'm383',
+    name: 'Xiaolongbao',
+    description: 'Steamed dumplings filled with beef',
+    price: 7.5,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i580'],
+    allergyLabels: ['gluten'],
+  },
+  {
+    id: 'm384',
+    name: 'Gyoza with chicken',
+    description: 'Pan-fried dumplings with chicken filling',
+    price: 6.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i23'],
+    allergyLabels: ['gluten', 'treenut'],
+  },
+  {
+    id: 'm385',
+    name: 'Gyoza vegetarian',
+    description: 'Pan-fried dumplings with vegetable filling',
+    price: 6.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i569'],
+    allergyLabels: ['gluten', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm386',
+    name: 'Gyoza with chicken (10 pieces)',
+    description: 'Pan-fried dumplings with chicken filling - 10 pieces',
+    price: 12.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i23'],
+    allergyLabels: ['gluten', 'treenut'],
+  },
+  {
+    id: 'm387',
+    name: 'Gyoza vegetarian (10 pieces)',
+    description: 'Pan-fried dumplings with vegetable filling - 10 pieces',
+    price: 12.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i569'],
+    allergyLabels: ['gluten', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm388',
+    name: 'Bao bun - Chicken',
+    description: 'Steamed bun with spicy chicken filling',
+    price: 6.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i581', 'i23', 'i577'],
+    allergyLabels: ['gluten', 'soy', 'treenut'],
+  },
+  {
+    id: 'm389',
+    name: 'Bao bun - Beef',
+    description: 'Steamed bun with spicy beef filling',
+    price: 6.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i581', 'i580', 'i577'],
+    allergyLabels: ['gluten', 'soy', 'treenut'],
+  },
+  {
+    id: 'm390',
+    name: 'Dim sum mix',
+    description: 'Mixed dim sums with prawns & chicken - 8 pieces',
+    price: 11.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i579', 'i576', 'i23', 'i582'],
+    allergyLabels: ['gluten', 'shellfish', 'treenut', 'dairy'],
+  },
+  {
+    id: 'm391',
+    name: 'Korean prawn pancakes',
+    description: 'Pancakes with shrimps, potatoes, carrots, zucchini, onion',
+    price: 13.9,
+    categoryId: 'c1', // Appetizers
+    restaurantId: 'r41',
+    ingredientIds: ['i576', 'i28', 'i21', 'i583', 'i34', 'i584'],
+    allergyLabels: ['gluten', 'treenut', 'dairy', 'shellfish'],
+  },
+
+  // Mint 11 (r41) - RAMEN / UDON
+  {
+    id: 'm392',
+    name: 'Heasanmul prawns with vegetables',
+    description: 'Spicy noodle soup with prawns and vegetables',
+    price: 23.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i585', 'i576', 'i586', 'i587'],
+    allergyLabels: ['gluten', 'egg', 'dairy', 'shellfish'],
+  },
+  {
+    id: 'm393',
+    name: 'Soegogi beef with vegetables',
+    description: 'Spicy noodle soup with beef and vegetables',
+    price: 20.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i585', 'i580', 'i586', 'i588'],
+    allergyLabels: ['gluten', 'egg', 'soy'],
+  },
+  {
+    id: 'm394',
+    name: 'Dalk chicken with vegetables',
+    description: 'Spicy noodle soup with chicken and vegetables',
+    price: 18.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i585', 'i23', 'i586'],
+    allergyLabels: ['gluten', 'egg'],
+  },
+  {
+    id: 'm395',
+    name: 'Yachae vegetarian',
+    description: 'Spicy vegetarian noodle soup with vegetables',
+    price: 16.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i585', 'i586'],
+    allergyLabels: ['gluten', 'egg', 'vegetarian'],
+  },
+
+  // Mint 11 (r41) - PHỞ
+  {
+    id: 'm396',
+    name: 'Phở Bò Beef',
+    description:
+      'Traditional Vietnamese soup with rice ribbon noodles, beef, traditional spices, bean sprouts, spring onions & herbs',
+    price: 20.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i589', 'i580', 'i590', 'i591', 'i592', 'i40'],
+    allergyLabels: ['gluten', 'dairy'],
+  },
+  {
+    id: 'm397',
+    name: 'Phở Gà Chicken',
+    description:
+      'Traditional Vietnamese soup with rice ribbon noodles, chicken, traditional spices, bean sprouts, spring onions & herbs',
+    price: 18.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i589', 'i23', 'i590', 'i591', 'i592', 'i40'],
+    allergyLabels: ['dairy'],
+  },
+  {
+    id: 'm398',
+    name: 'Phở Ăn Chay Vegetarian',
+    description:
+      'Traditional Vietnamese vegetarian soup with rice ribbon noodles, traditional spices, bean sprouts, spring onions & herbs',
+    price: 16.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i589', 'i590', 'i591', 'i592', 'i40'],
+    allergyLabels: ['dairy', 'vegetarian'],
+  },
+
+  // Mint 11 (r41) - CULINARY CHARMS
+  {
+    id: 'm399',
+    name: 'Mint11 Chicken',
+    description: 'Chicken with Thai sauce, salad mix, herbs & pan bread',
+    price: 22.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i23', 'i593', 'i572', 'i40', 'i594'],
+    allergyLabels: ['gluten', 'dairy', 'treenut'],
+  },
+  {
+    id: 'm400',
+    name: 'Bun bar with chicken skewer',
+    description:
+      'Glass noodles, salad mix, peanuts, fried onions & lime dressing',
+    price: 22.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i574', 'i572', 'i24', 'i595', 'i596', 'i23'],
+    allergyLabels: ['egg', 'dairy', 'treenut', 'peanut'],
+  },
+  {
+    id: 'm401',
+    name: 'Thai curry soup pot - Chicken',
+    description:
+      'Spicy curry soup with chicken, coconut milk, wok vegetables & rice noodles',
+    price: 22.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i23', 'i597', 'i598', 'i589'],
+    allergyLabels: ['gluten', 'dairy'],
+  },
+  {
+    id: 'm402',
+    name: 'Thai curry soup pot - Vegetarian',
+    description:
+      'Spicy vegetarian curry soup with coconut milk, wok vegetables & rice noodles',
+    price: 22.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i597', 'i598', 'i589'],
+    allergyLabels: ['gluten', 'dairy', 'vegetarian'],
+  },
+  {
+    id: 'm403',
+    name: 'Tomyam gung with prawns',
+    description:
+      'Sour and spicy soup with prawns, chili, lemongrass, vegetables, jasmine rice',
+    price: 26.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i576', 'i599', 'i600', 'i586', 'i10'],
+    allergyLabels: ['dairy', 'shellfish'],
+  },
+  {
+    id: 'm404',
+    name: 'Red curry chicken',
+    description:
+      'Spicy red curry with chicken, coconut milk, wok vegetables & jasmine rice',
+    price: 22.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i23', 'i601', 'i597', 'i598', 'i10'],
+    allergyLabels: ['dairy'],
+  },
+  {
+    id: 'm405',
+    name: 'Red curry duck',
+    description:
+      'Spicy red curry with duck, coconut milk, wok vegetables & jasmine rice',
+    price: 22.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i602', 'i601', 'i597', 'i598', 'i10'],
+    allergyLabels: ['dairy'],
+  },
+  {
+    id: 'm406',
+    name: 'Red Curry Vegetable',
+    description: 'Spicy red curry with vegetables and jasmine rice (tofu +€2)',
+    price: 20.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i601', 'i598', 'i10'],
+    allergyLabels: ['dairy', 'vegetarian'],
+  },
+  {
+    id: 'm407',
+    name: 'Chicken with home-style wok vegetables',
+    description: 'Stir-fried chicken with wok vegetables and jasmine rice',
+    price: 20.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i23', 'i598', 'i10'],
+    allergyLabels: ['soy', 'treenut'],
+  },
+  {
+    id: 'm408',
+    name: 'Cashew nut chicken',
+    description:
+      'Fried chicken with wok vegetables, cashew nuts & jasmine rice',
+    price: 20.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i23', 'i598', 'i60', 'i10'],
+    allergyLabels: ['shellfish', 'soy', 'treenut'],
+  },
+  {
+    id: 'm409',
+    name: 'Ma-La Beef',
+    description: 'Stir-fried beef with special spicy sauce & jasmine rice',
+    price: 22.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i580', 'i577', 'i10'],
+    allergyLabels: ['gluten', 'soy', 'treenut'],
+  },
+
+  // Mint 11 (r41) - THE POWER OF ASIA BOWL
+  {
+    id: 'm410',
+    name: 'Korean beef bibimbap bowl',
+    description:
+      'Beef, kimchi, quinoa, avocado, broccoli, salad mix, green soybeans',
+    price: 23.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i580', 'i603', 'i51', 'i4', 'i604', 'i572', 'i605'],
+    allergyLabels: ['gluten', 'dairy', 'soy', 'treenut'],
+  },
+  {
+    id: 'm411',
+    name: 'Salmon Bowl',
+    description:
+      'Salmon fillet, avocado, quinoa, kimchi, green soybeans, salad mix, seaweed',
+    price: 25.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i606', 'i4', 'i51', 'i603', 'i605', 'i572', 'i607'],
+    allergyLabels: ['gluten', 'dairy', 'soy', 'treenut', 'fish'],
+  },
+  {
+    id: 'm412',
+    name: 'Vegetable Bowl',
+    description:
+      'Quinoa, avocado, salad mix, wok vegetables, green soybeans & mango (tofu +€2)',
+    price: 20.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i51', 'i4', 'i572', 'i598', 'i605', 'i608'],
+    allergyLabels: ['gluten', 'soy', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm413',
+    name: 'Gyoza noodle bowl - Chicken',
+    description:
+      'Noodles with fried chicken gyoza, salad mix, herbs in spicy Szechuan style',
+    price: 17.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i585', 'i579', 'i23', 'i572', 'i40', 'i577'],
+    allergyLabels: ['gluten', 'egg', 'treenut'],
+  },
+  {
+    id: 'm414',
+    name: 'Gyoza noodle bowl - Vegetarian',
+    description:
+      'Noodles with fried vegetarian gyoza, salad mix, herbs in spicy Szechuan style',
+    price: 17.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i585', 'i579', 'i569', 'i572', 'i40', 'i577'],
+    allergyLabels: ['gluten', 'egg', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm415',
+    name: 'Prawn bowl',
+    description:
+      'Fried prawns with avocado, quinoa, kimchi, green soybeans, salad mix & seaweed',
+    price: 24.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i576', 'i4', 'i51', 'i603', 'i605', 'i572', 'i607'],
+    allergyLabels: ['gluten', 'dairy', 'soy', 'treenut', 'shellfish'],
+  },
+
+  // Mint 11 (r41) - SALAD
+  {
+    id: 'm416',
+    name: 'Beef salad with herbs & spicy dressing',
+    description: 'Fresh beef salad with aromatic herbs and spicy dressing',
+    price: 13.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i580', 'i40', 'i609', 'i572'],
+    allergyLabels: ['egg', 'soy', 'treenut'],
+  },
+  {
+    id: 'm417',
+    name: 'Thai avocado prawn salad',
+    description: 'Spicy salad with prawns, avocado, quinoa, and mango',
+    price: 15.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i576', 'i4', 'i51', 'i608', 'i572'],
+    allergyLabels: ['dairy', 'treenut', 'shellfish'],
+  },
+  {
+    id: 'm418',
+    name: 'Thai glass noodle salad with herbs',
+    description: 'Refreshing glass noodle salad with fresh herbs',
+    price: 6.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i574', 'i40'],
+    allergyLabels: ['dairy', 'soy', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm419',
+    name: 'Thai glass noodle salad with prawns',
+    description: 'Glass noodle salad with prawns and fresh herbs',
+    price: 6.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i574', 'i576', 'i40'],
+    allergyLabels: ['dairy', 'soy', 'treenut', 'shellfish'],
+  },
+  {
+    id: 'm420',
+    name: 'Mixed salad with fresh mango strips',
+    description: 'Fresh mixed salad topped with sweet mango strips',
+    price: 13.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i572', 'i608'],
+    allergyLabels: ['soy', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm421',
+    name: 'Kimchi salad',
+    description: 'Traditional Korean fermented cabbage salad',
+    price: 6.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i603'],
+    allergyLabels: ['dairy', 'treenut', 'vegetarian'],
+  },
+  {
+    id: 'm422',
+    name: 'Avocado mango salad',
+    description: 'Fresh salad with creamy avocado and sweet mango',
+    price: 9.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i4', 'i608', 'i572'],
+    allergyLabels: ['vegetarian'],
+  },
+  {
+    id: 'm423',
+    name: 'Thai chicken breast strips salad',
+    description: 'Salad with grilled chicken breast strips and Thai dressing',
+    price: 8.9,
+    categoryId: 'c2', // Main Courses
+    restaurantId: 'r41',
+    ingredientIds: ['i23', 'i572', 'i609'],
+    allergyLabels: ['dairy', 'soy', 'treenut'],
+  },
 ];
